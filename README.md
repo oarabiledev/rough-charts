@@ -88,27 +88,50 @@ And Then Place Your Chart View
 chart.CreateChartView(type, elemName, data, width, height, parentLay);
 ```
 
+Now Because All The Plugin Is Doing Is Placing Html, we need a classname that is our __elemNam__
+So remeber in your data configuration its a class so hence '.x' but in the declaration just pass
+'x'.
+
 The Methods Available Are::
 
 
 ```javascript
-this.setBackColor = function (color){
-        chartView.SetBackColor(color);
-}
+this.setMargins( left, top, right, bottom, mode)
+
+this.setPosition( left, top, width, height, options)
     
- this.setBackAlpha = function(alpha){
- chartView.SetBackAlpha(alpha);
-}
+this.setPadding(left, top, right, bottom, mode)
     
-this.reloadChart = function(){
- chartView.Reload();
-}
+this.setScale(x,y)
+
+this.setDescription(desc)
     
-this.printChart = function(){
-chartView.Print();
-}
+this.setEnabled(boolEnabled);
+
+this.setBackColor()
+
+this.setBackAlpha()
     
-this.imageChart = function(fileDirectory){
- chartView.Capture(fileDirectory);
-}
+this.reloadChart()
+    
+this.printChat()
+    
+this.imageChar(fileDirectory)
+
+this.setBackGradient( color1, color2, color3, options)
+    
+this.setBackgradientRadial(x, y, radius, color1, color2, color3, options)
+
+this.setVisibility(mode)
+    
+this.Hide()
+    
+this.Gone()
+
+this.Show()
+
+this.GetVisibility()
+
+this.isVisible()
+
 ```
