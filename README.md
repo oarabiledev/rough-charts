@@ -3,8 +3,12 @@
 # dsRoughViz
 
 An Implementation of [RoughViz.js](https://github.com/jwilber/roughViz) To Be Used Within DroidScript, easily.
-Yead Documentation Finished ✅.
-Okay, here is how it works within ds:
+
+
+Yeah Documentation Finished ✅.
+
+
+Okay, 😒 here is how it works within ds:
 
 ```javascript
 app.LoadPlugin('dsRoughViz')
