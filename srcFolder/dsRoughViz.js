@@ -22,10 +22,68 @@ app.CreateRoughChart = function(){
 
 
 rz.CreateChartView = function (type, elemName, data, width, height, parentLay) {
+    this.setMargins = function ( left, top, right, bottom, mode){
+        chartView.SetMargins( left, top, right, bottom, mode);
+    }
+    
+    this.setPosition = function ( left, top, width, height, options){
+        chartView.SetPosition( left, top, width, height, options);
+    }
+    
+    this.setPadding = function (left, top, right, bottom, mode){
+        chartView.SetPadding(left, top, right, bottom, mode);
+    }
+    
+    this.setScale = function (x,y){
+        chartView.SetScale(x,y);
+    }
+    
+    this.setDescription = function(desc){
+        chartView.SetDescription(desc);
+    }
+    
+    this.setEnabled = function (boolEnabled){
+        chartView.SetEnabled(boolEnabled);
+    }
+    
     this.setBackColor = function (color){
         chartView.SetBackColor(color);
     }
     
+    this.setBackground = function (file, options){
+        chartView.SetBackground(file, options);
+    }
+    
+    this.setBackGradient = function ( color1, color2, color3, options){
+        chartView.SetBackGradient( color1, color2, color3, options);
+    }
+    
+    this.setBackgradientRadial = function(x, y, radius, color1, color2, color3, options){
+        chartView.SetBackGradientRadial(x, y, radius, color1, color2, color3, options);
+    }
+    
+    this.setVisibility = function(mode){
+        chartView.SetVisibility(mode);
+    }
+    
+    this.Hide = function(){
+        chartView.Hide();
+    }
+    
+    this.Gone = function(){
+        chartView.Gone();
+    }
+    this.Show = function(){
+        chartView.Show();
+    }
+    
+    this.GetVisibility = function (){
+        return chartView.GetVisibility();
+    }
+    
+    this.isVisible = function(){
+        return chartView.IsVisible();
+    }
     this.setBackAlpha = function(alpha){
         chartView.SetBackAlpha(alpha);
     }
@@ -75,7 +133,7 @@ rz.CreateChartView = function (type, elemName, data, width, height, parentLay) {
 }
 
 function drawBarChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -105,7 +163,7 @@ function drawBarChart(type, elemName, data, width, height, parentLay){
 }
     
 function drawBarChartHorizontal(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -135,7 +193,7 @@ function drawBarChartHorizontal(type, elemName, data, width, height, parentLay){
 }
 
 function drawDonutChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -165,7 +223,7 @@ function drawDonutChart(type, elemName, data, width, height, parentLay){
 }
 
 function drawPieChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -195,7 +253,7 @@ function drawPieChart(type, elemName, data, width, height, parentLay){
 }
 
 function drawScatterChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -226,7 +284,7 @@ function drawScatterChart(type, elemName, data, width, height, parentLay){
 
 
 function drawStackedBar(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -256,7 +314,7 @@ function drawStackedBar(type, elemName, data, width, height, parentLay){
 }
 
 function drawLineChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
@@ -286,7 +344,7 @@ function drawLineChart(type, elemName, data, width, height, parentLay){
 }
 
 function drawForceChart(type, elemName, data, width, height, parentLay){
-    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,AutoZoom');
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
     
     
     chartHTML = `
