@@ -16,7 +16,7 @@ app.LoadPlugin('dsRoughViz')
 function OnStart(){
     lay = app.CreateLayout('Linear', 'FillXY,VCenter')
     
-    chart = app.CreateRoughChart();
+    app.CreateRoughChart();
     
     piedata =  {
       element: '.x',
@@ -33,7 +33,7 @@ function OnStart(){
       fillStyle: 'cross-hatch',
       fillWeight: 0.5,
     }
-    chart.CreateChartView('pie','x', piedata, 0.5,0.5, lay);
+    chart = app.CreateChartView('pie','x', piedata, 0.5,0.5, lay);
    
     app.AddLayout(lay)
     
@@ -83,13 +83,13 @@ chart.CreateChartView('pie','x', piedata, 0.5,0.5, lay);
 
 All you have to do is initalize it with
 '''javascript
- chart = app.CreateRoughChart();
+ app.CreateRoughChart();
 ````
 
 And Then Place Your Chart View
 
 ```javascript
-chart.CreateChartView(type, elemName, data, width, height, parentLay);
+chart = app.CreateChartView(type, elemName, data, width, height, parentLay);
 ```
 
 Now Because All The Plugin Is Doing Is Placing Html, we need a classname that is our __elemNam__
