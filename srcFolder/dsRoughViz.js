@@ -15,13 +15,24 @@
 const rz = {};
 var chartView;
 
-// Initialization Function
+
+const __Rzdebug = app.GetAppPath().endsWith('/dsRoughViz'); 
+const _Rzpath = __Rzdebug ? '' : app.GetPrivateFolder('Plugins') + '/dsroughviz/' 
+
+const scriptPath = _Rzpath+'roughViz.js';
+
+app.Script(scriptPath);
+
 app.CreateRoughChart = function(){
-    return rz;
+    return null;
 }
 
 
-rz.CreateChartView = function (type, elemName, data, width, height, parentLay) {
+app.CreateChartView = function (type, elemName, data, width, height, parentLay) {
+    return new chartCanvas(type, elemName, data, width, height, parentLay)
+}
+
+function chartCanvas(type, elemName, data, width, height, parentLay){
     this.setMargins = function ( left, top, right, bottom, mode){
         chartView.SetMargins( left, top, right, bottom, mode);
     }
@@ -127,6 +138,9 @@ rz.CreateChartView = function (type, elemName, data, width, height, parentLay) {
     else if(type.toLowerCase() === 'line'){
         drawLineChart(type, elemName, data, width, height, parentLay);
     }
+    else if(type.toLowerCase() === 'network'){
+        drawNetWorkChart(type, elemName, data, width, height, parentLay);
+    }
     else {
         drawForceChart(type, elemName, data, width, height, parentLay);
     }
@@ -140,7 +154,7 @@ function drawBarChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -161,6 +175,36 @@ function drawBarChart(type, elemName, data, width, height, parentLay){
     
     chartView.LoadHtml( chartHTML )
 }
+
+function drawNetworkChart(type, elemName, data, width, height, parentLay){
+    chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
+    
+    
+    chartHTML = `
+    <html>
+    
+    <head>
+    <script src="${scriptPath}"></script>
+    </head>
+    
+    <body>
+   
+    
+    <div class="${elemName}" style="width: 100%; height: 100%;">
+    </div>
+       
+    </body>
+    
+    <script>
+    
+    new roughViz.Network(${JSON.stringify(data)})
+    
+    </script>
+    
+    </html>`;
+    
+    chartView.LoadHtml( chartHTML )
+}
     
 function drawBarChartHorizontal(type, elemName, data, width, height, parentLay){
     chartView = app.AddWebView(parentLay, width, height, 'NoScrollBars,FillXY,AllowZoom,NoActionBar,AutoZoom');
@@ -170,7 +214,7 @@ function drawBarChartHorizontal(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -200,7 +244,7 @@ function drawDonutChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -230,7 +274,7 @@ function drawPieChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -260,7 +304,7 @@ function drawScatterChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -291,7 +335,7 @@ function drawStackedBar(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -321,7 +365,7 @@ function drawLineChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
@@ -351,7 +395,7 @@ function drawForceChart(type, elemName, data, width, height, parentLay){
     <html>
     
     <head>
-    <script src="roughViz.js"></script>
+    <script src="${scriptPath}"></script>
     </head>
     
     <body>
