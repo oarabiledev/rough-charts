@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> </head>
+    <body>
+        <header class="header">
+            <button
+                class="back-button"
+                onClick=' history.back(); history.back(); 
+        window.location.href = "../../Plugins.htm?ds=true"; return false;'
+            >
+                Back
+            </button>
+            <button class="language-switch" onclick="switchLanguage()">
+                Switch to Python
+            </button>
+        </header>
+
+        <h1>rough-charts</h1>
+        <p>
+            The rough-charts plugin is an implementation of the roughViz.js
+            library designed to work in DroidScript.
+        </p>
+
+        <section>
+            <h2>🔥 Getting Started</h2>
+            <p>
+                To get started, install this plugin from the GitHub releases
+                page or from the DroidStore.
+            </p>
+            <p>
+                Once downloaded, open the file (with a
+                <code>.ppk</code> extension) using DroidScript. Wait for the
+                installation to complete (you should see a successful install
+                pop-up).
+            </p>
+            <p>When creating your application, load the plugin as follows:</p>
+
+            <pre><code id="code-block-1">app.LoadPlugin("rough-charts");</code>
+        <button class="copy-button" onclick="copyToClipboard('code-block-1')">Copy</button></pre>
+
+            <p>
+                In your <code>OnStart</code> function, initialize the plugin
+                like this:
+            </p>
+
+            <pre><code id="code-block-2">app.LoadPlugin("rough-charts");
+
+function OnStart() {
+    let chart = app.CreateRoughChart();
+}</code>
+        <button class="copy-button" onclick="copyToClipboard('code-block-2')">Copy</button></pre>
+        </section>
+
+        <section>
+            <h2>🔥 Basic's Of The Plugin</h2>
+            <p>
+                The rough-charts plugin implements roughViz.js, so we follow the
+                library's input data structure. You can find the documentation
+                here:
+                <a href="https://github.com/jwilber/roughViz" target="_blank"
+                    >roughViz GitHub Page</a
+                >.
+            </p>
+            <p>
+                When working with the plugin, you don’t need to specify the
+                element ID or class for the chart; it's handled behind the
+                scenes.
+            </p>
+            <p>
+                Essentially, you do not need to populate the element data in the
+                data structure.
+            </p>
+
+            <p>
+                The <code>CreateChart</code> function accepts the following
+                parameters:
+            </p>
+
+            <pre><code id="code-block-3">chart.CreateChart(bar_type, bar_data, width, height);</code>
+        <button class="copy-button" onclick="copyToClipboard('code-block-3')">Copy</button></pre>
+
+            <p>The supported chart types are:</p>
+            <ul>
+                <li>bar</li>
+                <li>donut</li>
+                <li>line</li>
+                <li>pie</li>
+                <li>scatter</li>
+                <li>network</li>
+                <li>stackedbar</li>
+            </ul>
+
+            <p>
+                The plugin uses a webview to load the chart, meaning you can
+                also use webview methods on the chart, such as:
+            </p>
+
+            <pre><code id="code-block-4">let chart = app.CreateRoughChart();
+let barChart = chart.CreateChart("bar", bardata, 0.95, 0.5);
+
+// WebView methods
+barChart.SetBackColor();
+barChart.SetMargins();
+barChart.Reload();</code>
+        <button class="copy-button" onclick="copyToClipboard('code-block-4')">Copy</button></pre>
+        </section>
+
+        <section>
+            <h2>💡 Example</h2>
+            <p>
+                Below is an example of how to create a simple bar chart using
+                the rough-charts plugin.
+            </p>
+
+            <pre><code id="code-block-5">
+app.LoadPlugin("rough-charts");
+
+function OnStart() {
+    let chart = app.CreateRoughChart();
+    let lay = app.CreateLayout("Absolute", "VCenter,FillXY");
+
+    // RoughViz Data Structure
+    // Do not add element value!
+    let bardata = {
+        data: {
+            labels: ["North", "South", "East", "West"],
+            values: [10, 5, 8, 3],
+        },
+        title: "Regions",
+        margin: { top: 50, left: 50, right: 50, bottom: 50 },
+        roughness: 0,
+        colors: ["red", "orange", "blue", "skyblue"],
+        stroke: "black",
+        strokeWidth: 1,
+        fillStyle: "cross-hatch",
+        fillWeight: 0.5,
+    };
+
+    let barChart = chart.CreateChart("bar", bardata, 0.95, 0.5);
+    lay.AddChild(barChart);
+    app.AddLayout(lay);
+}</code>
+        <button class="copy-button" onclick="copyToClipboard('code-block-5')">Copy</button></pre>
+        </section>
+
+        <footer class="footer">
+            <p>
+                <a
+                    href="https://github.com/oarabiledev/rough-charts"
+                    target="_blank"
+                    >GitHub Repository</a
+                >
+                | Ported by Oarabile Koore
+            </p>
+        </footer>
+
+        <script>
+            if (typeof $ === "function") {
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1);
+            }
+
+            (function () {
+                const styleSheet = document.createElement("link");
+                styleSheet.rel = "stylesheet";
+                styleSheet.href = "main.css";
+                document.head.appendChild(styleSheet);
+            })();
+
+            let currentLanguage = "javascript";
+
+            function copyToClipboard(codeBlockId) {
+                const codeBlock =
+                    document.getElementById(codeBlockId).innerText;
+
+                // Copy the text to the clipboard
+                navigator.clipboard.writeText(codeBlock);
+            }
+
+            function switchLanguage() {
+                if (currentLanguage === "javascript") {
+                    // Switch to Python code (keeping JavaScript-style function names)
+                    document.getElementById("code-block-1").innerText =
+                        'app.LoadPlugin("rough-charts")';
+                    document.getElementById(
+                        "code-block-2"
+                    ).innerText = `app.LoadPlugin("rough-charts")\n\ndef OnStart():\n    chart = app.CreateRoughChart()`;
+                    document.getElementById("code-block-3").innerText =
+                        'chart.CreateChart("bar", bardata, 0.95, 0.5)';
+                    document.getElementById(
+                        "code-block-4"
+                    ).innerText = `chart = app.CreateRoughChart()\nbarChart = chart.CreateChart("bar", bardata, 0.95, 0.5)\n\n# WebView methods\nbarChart.SetBackColor()\nbarChart.SetMargins()\nbarChart.Reload()`;
+                    document.getElementById(
+                        "code-block-5"
+                    ).innerText = `app.LoadPlugin("rough-charts")\n\ndef OnStart():\n    chart = app.CreateRoughChart()\n    lay = app.CreateLayout("Absolute", "VCenter,FillXY")\n\n    # RoughViz Data Structure\n    # Do not add element value!\n    bardata = {\n        'data': {\n            'labels': ["North", "South", "East", "West"],\n            'values': [10, 5, 8, 3],\n        },\n        'title': "Regions",\n        'margin': {'top': 50, 'left': 50, 'right': 50, 'bottom': 50},\n        'roughness': 0,\n        'colors': ["red", "orange", "blue", "skyblue"],\n        'stroke': "black",\n        'strokeWidth': 1,\n        'fillStyle': "cross-hatch",\n        'fillWeight': 0.5,\n    }\n    barChart = chart.CreateChart("bar", bardata, 0.95, 0.5)\n    lay.AddChild(barChart)\n    app.AddLayout(lay)`;
+
+                    document.querySelector(".language-switch").innerText =
+                        "Switch to JavaScript";
+                    currentLanguage = "python";
+                } else {
+                    // Switch back to JavaScript code
+                    location.reload(); // Reload to reset to the original JavaScript code
+                }
+            }
+        </script>
+    </body>
+</html>

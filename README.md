@@ -1,141 +1,103 @@
-![Banner Image For DroidScript RoughViz Plugin](dsRoughViz.png)
+![](image.png)
 
-# dsRoughViz
+# rough-charts
 
-An Implementation of [RoughViz.js](https://github.com/jwilber/roughViz) To Be Used Within DroidScript, easily.
+rough-charts plugin is an implementation of roughViz.js library to work in DroidScript.
 
+## 🔥Getting Started
 
-Yeah Documentation Finished ✅.
+To get started install this plugin from the github releases page or from the DroidStore.
 
+After that then open the downloaded file (with .ppk extension) using DroidScript then await a completed install (you should see a succesfull install pop-up).
 
-Okay, 😒 here is how it works within ds:
+When you create your application load the plugin via :
 
 ```javascript
-app.LoadPlugin('dsRoughViz')
+app.LoadPlugin("rough-charts");
+```
 
-function OnStart(){
-    lay = app.CreateLayout('Linear', 'FillXY,VCenter')
-    
-    app.CreateRoughChart();
-    
-    piedata =  {
-      element: '.x',
-      data: {
-        labels: ['North', 'South', 'East', 'West'],
-        values: [10, 5, 8, 3]
-      },
-      title: "Regions",
-      roughness: 0,
-      colors: ['green', 'orange', 'blue', 'skyblue'],
-      stroke: 'black',
-      strokeWidth: 4,
-      innerStrokeWidth: 1,
-      fillStyle: 'cross-hatch',
-      fillWeight: 0.5,
-    }
-    chart = app.CreateChartView('pie','x', piedata, 0.5,0.5, lay);
-   
-    app.AddLayout(lay)
-    
+In your OnStart Function initialize the plugin this way :
+
+```javascript
+app.LoadPlugin("rough-charts");
+
+function OnStart() {
+    let chart = app.CreateRoughChart();
 }
 ```
 
+## 🔥Basic's Of The Plugin
 
-When you look at it, the syntax is easy and understandable, the way roughViz.js and data is the same,
-let me cook and show you::
+rough-charts implements roughViz.js so we follow the library's input data structure, the documentation can be found at : [roughViz Github Page](https://github.com/jwilber/roughViz)
 
+After reading the data structure, in the web you need to specify the element id or classname that roughViz.js uses to attach the svg chart to, do not worry about this I have implemented it behind the scenes no need to worry.
 
-In Vannila Web Dev, You Simply Declare A Div And your Script Tag To The Resource.
+Basically do not poppulate the element data in the data structure.
 
-```html
-<div id="viz0" style="width: 500px; height: 500px;" ></div>
-````
-
-And Then Do 
+The `CreateChart` function takes in the following parameters:
 
 ```javascript
-new roughViz.Donut(
-    {
-      element: '#viz0',
-      data: {
-        labels: ['North', 'South', 'East', 'West'],
-        values: [10, 5, 8, 3]
-      },
-      title: "Regions",
-      roughness: 8,
-      colors: ['red', 'orange', 'blue', 'skyblue'],
-      stroke: 'black',
-      strokeWidth: 3,
-      fillStyle: 'cross-hatch',
-      fillWeight: 3.5,
-    }
-  );
+chart.CreateChart(bar_type, bar_data, width, height);
 ```
 
+The following charts are supported :
 
-However when using the plugin, the data passed as a paramenter into the roughviz.Donut(parameter), is 
-your data:::
+- bar
+- donut
+- line
+- pie
+- scatter
+- network
+- stackedbar
 
-```javascript
-chart.CreateChartView('pie','x', piedata, 0.5,0.5, lay);
-//piedata is that data
-'''
+From all of this we can deduce that the plugin uses a webview which loads a view of the chart, this means all the methods available in a traditional webview are available to the chart function.
 
-All you have to do is initalize it with
-'''javascript
- app.CreateRoughChart();
-````
-
-And Then Place Your Chart View
+Therefore you can use methods like :
 
 ```javascript
-chart = app.CreateChartView(type, elemName, data, width, height, parentLay);
+let chart = app.CreateRoughChart();
+let barChart = chart.CreateChart("bar", bardata, 0.95, 0.5);
+
+// We can use the following methods in a webview here too..
+barChart.SetBackColor();
+barChart.SetMargins();
+barChart.Reload();
 ```
 
-Now Because All The Plugin Is Doing Is Placing Html, we need a classname that is our __elemNam__
-So remeber in your data configuration its a class so hence '.x' but in the declaration just pass
-'x'.
+## 💡Example
 
-The Methods Available Are::
-
+Now, we will implement a simple bar chart.
 
 ```javascript
-this.setMargins( left, top, right, bottom, mode)
+app.LoadPlugin("rough-charts");
+cfg.Fast;
+cfg.MUI = cfg.MUI;
 
-this.setPosition( left, top, width, height, options)
-    
-this.setPadding(left, top, right, bottom, mode)
-    
-this.setScale(x,y)
+function OnStart() {
+    let chart = app.CreateRoughChart();
 
-this.setDescription(desc)
-    
-this.setEnabled(boolEnabled);
+    let lay = MUI.CreateLayout("Absolute", "VCenter,FillXY");
 
-this.setBackColor()
+    //RoughViz Data Structure
+    //Do not add element value !
+    let bardata = {
+        data: {
+            labels: ["North", "South", "East", "West"],
+            values: [10, 5, 8, 3],
+        },
+        title: "Regions",
+        margin: { top: 50, left: 50, right: 50, bottom: 50 },
+        roughness: 0,
+        colors: ["red", "orange", "blue", "skyblue"],
+        stroke: "black",
+        strokeWidth: 1,
+        fillStyle: "cross-hatch",
+        fillWeight: 0.5,
+    };
 
-this.setBackAlpha()
-    
-this.reloadChart()
-    
-this.printChat()
-    
-this.imageChar(fileDirectory)
+    let barChart = chart.CreateChart("bar", bardata, 0.95, 0.5);
+    lay.AddChild(barChart);
 
-this.setBackGradient( color1, color2, color3, options)
-    
-this.setBackgradientRadial(x, y, radius, color1, color2, color3, options)
-
-this.setVisibility(mode)
-    
-this.Hide()
-    
-this.Gone()
-
-this.Show()
-
-this.GetVisibility()
-
-this.isVisible()
-
+    app.AddLayout(lay);
+}
 ```

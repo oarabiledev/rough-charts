@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #e0e0e0;
+    padding: 20px;
+}
+h1,
+h2,
+h3 {
+    color: #bb86fc;
+}
+code {
+    background-color: #1f1f1f;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 1em;
+    color: #03dac6;
+}
+pre {
+    background-color: #1f1f1f;
+    padding: 15px;
+    border-radius: 8px;
+    color: #ffffff;
+    overflow: auto;
+    position: relative;
+}
+a {
+    color: #03dac6;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+ul {
+    margin-left: 20px;
+}
+header img {
+    width: 100%;
+    max-width: 600px;
+}
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #bb86fc;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #2e2e2e;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f1f1f;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.back-button {
+    background-color: #bb86fc;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.back-button:hover {
+    background-color: #9b4dce;
+}
+.language-switch {
+    background-color: #03dac6;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.language-switch:hover {
+    background-color: #02c1a9;
+}
+
+/* Copy button styling */
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #bb86fc;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.copy-button:hover {
+    background-color: #9b4dce;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #bbbbbb;
+}
